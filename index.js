@@ -57,11 +57,19 @@ function generateReadMe(choices) {
   //writing each choice in the file
   fs.writeFile(
     "README.md",
+    //format + choices input
     `# ${choices.title} 
 
 ## Description
 
 ${choices.description}
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
 
 ## Installation
 
@@ -73,12 +81,13 @@ ${choices.use}
 
 ## Credits
 
-${choices.gitUser} 
+${gitUser} 
 
 ## License
 
 ![badge](${license})`,
 
+    //checks if it logged correctly or failed :3
     (err) => (err ? console.error(err) : console.log("Success!"))
   );
 }
