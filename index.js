@@ -1,6 +1,8 @@
+//grab inquirer and the fs to make page
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+//inital promtps with questions for readme pg
 inquirer
   .prompt([
     {
@@ -28,6 +30,7 @@ inquirer
       message: "What is your GitHub username?",
       name: "gitName",
     },
+    //list 3 license instead of typing them out
     {
       type: "list",
       choices: ["MIT", "Apache", "BDS3"],
@@ -36,9 +39,14 @@ inquirer
     },
   ])
 
+  //start function to produce readme
   .then((response) => generateReadMe(response));
 
+//creating pg
 function generateReadMe(choices) {
+  //adding the users username to the github link
+  var gitUser = `https://github.com/${choices.gitName}`;
+  //deciding which license to pull and each has their own badge
   if (choices.license === "MIT") {
     var license = `https://badgen.net/github/license/micromatch/micromatch`;
   } else if (choices.license === "Apache") {
@@ -46,9 +54,10 @@ function generateReadMe(choices) {
   } else {
     var license = `https://badgen.net/hackage/license/Cabal`;
   }
+  //writing each choice in the file
   fs.writeFile(
     "README.md",
-    `${choices.title} \n ${choices.description} \n ${choices.instal} \n ${choices.use} \n ${choices.gitName} \n ![badge](${license})`,
+    `${choices.title} \n ${choices.description} \n ${choices.instal} \n ${choices.use} \n ${choices.gitUser} \n ![badge](${license})`,
     (err) => (err ? console.error(err) : console.log("Success!"))
   );
 }
