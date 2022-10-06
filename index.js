@@ -7,7 +7,8 @@ inquirer
   .prompt([
     {
       type: "text",
-      message: "Create your README file here! Just type or select your ansers when prompted.",
+      message:
+        "Create your README file here! Just type or select your ansers when prompted.",
       name: "open",
     },
     {
@@ -74,15 +75,20 @@ function generateReadMe(choices) {
   //deciding which license to pull and each has their own badge
   if (choices.license === "MIT") {
     var license = `https://badgen.net/github/license/micromatch/micromatch`;
-    var licenseDes =
+    var licenseDes = `The MIT license gives users express permission to reuse code for any purpose, 
+    sometimes even if code is part of proprietary software. As long as users include the original copy of the MIT license in their distribution, 
+    they can make any changes or modifications to the code to suit their own needs.`;
   } else if (choices.license === "Apache") {
     var license = `https://badgen.net/gitlab/license/gitlab-org/omnibus-gitlab`;
-    var licenseDes =
-
+    var licenseDes = `The Apache License is a permissive free software license written by the Apache Software Foundation (ASF).[4] 
+    It allows users to use the software for any purpose, to distribute it, to modify it,
+     and to distribute modified versions of the software under the terms of the license, without concern for royalties. 
+     The ASF and its projects release their software products under the Apache License. The license is also used by many non-ASF projects.`;
   } else {
     var license = `https://badgen.net/hackage/license/Cabal`;
-    var licenseDes =
-
+    var licenseDes = `The BSD 3-clause license allows you almost unlimited freedom with the software so 
+    long as you include the BSD copyright and license notice in it (found in Fulltext). 
+    Describes the ability to use the software for commercial purposes. Describes the ability to modify the software and create derivatives.`;
   }
   //writing each choice in the file
   fs.writeFile(
@@ -130,7 +136,9 @@ Github: ${gitUser}
 
 ## License
 
-![badge](${license})`,
+![badge](${license})
+
+${licenseDes}`,
 
     //checks if it logged correctly or failed :3
     (err) => (err ? console.error(err) : console.log("Success!"))
