@@ -6,6 +6,11 @@ const fs = require("fs");
 inquirer
   .prompt([
     {
+      type: "text",
+      message: "Create your README file here! Just type or select your ansers when prompted.",
+      name: "open",
+    },
+    {
       type: "input",
       message: "What is your project title?",
       name: "title",
@@ -30,6 +35,26 @@ inquirer
       message: "What is your GitHub username?",
       name: "gitName",
     },
+    {
+      type: "input",
+      message: "Were there any other contributers?",
+      name: "cont",
+    },
+    {
+      type: "input",
+      message: "Were any tests preformed?",
+      name: "test",
+    },
+    {
+      type: "input",
+      message: "Which is the best way to reach you?",
+      name: "quest",
+    },
+    {
+      type: "input",
+      message: "What is your email?",
+      name: "email",
+    },
     //list 3 license instead of typing them out
     {
       type: "list",
@@ -49,16 +74,21 @@ function generateReadMe(choices) {
   //deciding which license to pull and each has their own badge
   if (choices.license === "MIT") {
     var license = `https://badgen.net/github/license/micromatch/micromatch`;
+    var licenseDes =
   } else if (choices.license === "Apache") {
     var license = `https://badgen.net/gitlab/license/gitlab-org/omnibus-gitlab`;
+    var licenseDes =
+
   } else {
     var license = `https://badgen.net/hackage/license/Cabal`;
+    var licenseDes =
+
   }
   //writing each choice in the file
   fs.writeFile(
     "README.md",
     //format + choices input
-    `# ${choices.title} 
+    `# ${choices.title} ![badge](${license})
 
 ## Description
 
@@ -70,6 +100,8 @@ ${choices.description}
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
+- [Test](#tests)
+- [Questions](#questions)
 
 ## Installation
 
@@ -81,7 +113,20 @@ ${choices.use}
 
 ## Credits
 
-${gitUser} 
+${gitUser}
+
+${choices.cont}
+
+## Tests
+
+${choices.test}
+
+## Questions
+
+${choices.quest}
+
+Email: ${choices.email}
+Github: ${gitUser}
 
 ## License
 
