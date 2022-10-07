@@ -8,7 +8,7 @@ inquirer
     {
       type: "text",
       message:
-        "Create your README file here! Just type or select your ansers when prompted.",
+        "Create your README file here! Just type or select your ansers when prompted. Click enter to get started!",
       name: "open",
     },
     {
@@ -132,6 +132,7 @@ ${choices.test}
 ${choices.quest}
 
 Email: ${choices.email}
+
 Github: ${gitUser}
 
 ## License
